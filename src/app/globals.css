@@ -1,0 +1,151 @@
+@import "tailwindcss";
+
+/*
+ * Trust or Betray: genaiiu.com's colors (crimson, warm cream, warm brown ink) with Inter, Bricolage Grotesque and JetBrains Mono.
+ * Soft cream stage, big rounded paper cards, and two game colors: green for SHARE, crimson for STEAL.
+ */
+@theme {
+  --color-paper: #fffefc;
+  --color-cream: #f7f5f2;
+  --color-sand: #efebe7;
+  --color-line: #e5e0dc;
+  --color-line-strong: #d2c9c4;
+  --color-ink: #2e1f1f;
+  --color-ink-2: #4a3b3b;
+  --color-muted: #7e6767;
+  --color-faint: #ada29f;
+  --color-crimson: #981b25;
+  --color-crimson-dark: #7d1620;
+  --color-crimson-soft: #f6e8e9;
+
+  --color-share: #2f7d55;
+  --color-share-dark: #246344;
+  --color-share-soft: #e6f2eb;
+  --color-steal: #981b25;
+  --color-steal-soft: #f6e8e9;
+  --color-warn: #a86a12;
+  --color-warn-soft: #fbf2e2;
+
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-bricolage), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-jetbrains), ui-monospace, monospace;
+}
+
+html,
+body {
+  background: var(--color-cream);
+  color: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: rgb(152 27 37 / 0.15);
+}
+
+.display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.eyebrow {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-crimson);
+}
+
+/* Paper card on the cream stage. */
+.card {
+  background: var(--color-paper);
+  border-radius: 24px;
+  box-shadow:
+    0 0 0 1px var(--color-line),
+    0 18px 40px -28px rgb(46 31 31 / 0.35);
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.94);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animate-pop {
+  animation: pop 0.22s ease-out both;
+}
+
+@keyframes rise {
+  0% {
+    transform: translateY(14px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+.animate-rise {
+  animation: rise 0.35s ease-out both;
+}
+
+/* The share/steal reveal: a card flipping face up. */
+@keyframes flip {
+  0% {
+    transform: perspective(600px) rotateY(90deg);
+    opacity: 0;
+  }
+  100% {
+    transform: perspective(600px) rotateY(0);
+    opacity: 1;
+  }
+}
+.animate-flip {
+  animation: flip 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.2) both;
+}
+
+/* "…" typing indicator. */
+@keyframes typing {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+    transform: translateY(0);
+  }
+  40% {
+    opacity: 1;
+    transform: translateY(-2px);
+  }
+}
+.typing span {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  margin: 0 2px;
+  border-radius: 999px;
+  background: currentColor;
+  animation: typing 1.1s infinite;
+}
+.typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes pulse-soft {
+  50% {
+    opacity: 0.5;
+  }
+}
+.pulse-soft {
+  animation: pulse-soft 1.2s ease-in-out infinite;
+}
